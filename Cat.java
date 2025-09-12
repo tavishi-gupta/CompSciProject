@@ -8,9 +8,13 @@ public class Cat extends MovableAnimatedActor
     private Animation idleLeft;
     private Animation fallLeft;
     private Animation fallRight;
+    private int score;
+    private int lives;
     
     public Cat() 
     {
+        score = 0;
+        lives = 3;
         String [] walkName = new String[10];
         for (int i = 0; i < walkName.length; i++) {
             walkName[i] = "img/cat/Walk (" + (i+1) + ").png";
@@ -64,10 +68,49 @@ public class Cat extends MovableAnimatedActor
         setAnimation(idle);
         
     }
+    
+    public void increaseScore(int amount) {
+        score+=amount;
+    }
+    
+    public void decreaseLives(int amount) {
+        lives-=amount;
+    }
+    
+    public void updateText() {
+        World w = getWorld();
+        w.removeText(10, 30);
+        w.showText("Ingredients: " + score + "Lives: " + lives, 10, 30, Color.BLACK);
+    }
+    
+    public boolean Level1Complete() {
+        if (score == 3 && lives > 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean Level2Complete() {
+        if (score == 5 && lives > 0) {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean Level3Complete() {
+        if (score == 7 && lives > 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public void act()
     {
         
         super.act();
+        if (Level1Complete()) {
+            Mayflower.setWorld(new Level2());
+        }
         
         //walk.setTransparency(50);
         
