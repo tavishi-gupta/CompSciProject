@@ -1,61 +1,61 @@
+
 import mayflower.*;
-/**
- * Write a description of class Animation here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class Animation
 {
     // instance variables - replace the example below with your own
-    private MayflowerImage[] frames;
     private int framerate;
     private int currentFrame;
+    private MayflowerImage[] frames;
 
-    public Animation(int fr, String[] files){
-        framerate =  fr;
+    /**
+     * Constructor for objects of class Animation
+     */
+    public Animation(int num, String[] y)
+    {
+        // initialise instance variables
+        framerate = num;
         currentFrame = 0;
-        frames = new MayflowerImage[files.length];
-        for (int i = 0; i < frames.length; i ++){
-            frames[i] = new MayflowerImage(files[i]);
+        frames = new MayflowerImage[10];
+        for (int i = 0; i < y.length; i++) {
+            frames[i] = new MayflowerImage(y[i]);
         }
-
+        
     }
-
+    
+    public void setBounds(int x, int y, int w, int h) {
+        for (int i = 0; i < frames.length; i++) {
+            frames[i].crop(x, y, w, h);
+        }  
+    }
+    
     public int getFrameRate() {
         return framerate;
     }
-
-    public MayflowerImage getNextFrame(){
-
-        MayflowerImage img = frames[currentFrame];
-        currentFrame ++;
-        if ( currentFrame == frames.length){
-            currentFrame = 0;  
-        }
-        return img;
-    }
-
-    public void scale (int w, int h){
-        for (int i = 0; i < frames.length; i++){
+    
+    public void scale(int w, int h) {
+        for (int i = 0; i < frames.length; i++) {
             frames[i].scale(w, h);
         }
     }
-
-    public void setTransparency(int percent){
-        for (int i = 0; i < frames.length; i++){
+    
+    public void setTransparency(int percent) {
+        for (int i = 0; i < frames.length; i++) {
             frames[i].setTransparency(percent);
         }
     }
     
-    public void mirrorHorizontally(){
-        for (int i = 0; i < frames.length; i++){
+    public void mirrorHorizontally() {
+        for (int i = 0; i < frames.length; i++) {
             frames[i].mirrorHorizontally();
         }
     }
-    public void setBounds(int x, int y, int w, int h){
-        for (int i = 0; i < frames.length; i++){
-            frames[i].crop(x, y, w, h);
+    
+    public MayflowerImage getNextFrame() {
+        if (currentFrame%frames.length == 0) {
+            currentFrame = 0;
         }
+        MayflowerImage image = frames[currentFrame];
+        currentFrame += 1;
+        return image;
     }
 }
