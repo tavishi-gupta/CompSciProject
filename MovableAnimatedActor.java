@@ -15,6 +15,8 @@ public class MovableAnimatedActor extends AnimatedActor
     private Animation idleLeft;
     private Animation fallingLeft;
     private Animation fallingRight;
+    private Animation jumpRight;
+    private Animation jumpLeft;
 
     public MovableAnimatedActor(){
         walkRight = null;
@@ -65,9 +67,15 @@ public class MovableAnimatedActor extends AnimatedActor
 
         }
         else if ((y-1 > 0) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
-            setLocation (x , y - 1);
+            setLocation (x , y - 3);
             if(isBlocked()){
-                setLocation (x , y + 1);
+                setLocation (x , y + 3);
+            }
+            if (direction != null && direction == "left"){
+                newAction = "jumpLeft";
+            }
+            else if (direction != null && direction == "right"){
+             newAction = "jumpRight";   
             }
         }
         else if ((y+1+h < 600) && Mayflower.isKeyDown(Keyboard.KEY_DOWN)) {
@@ -78,13 +86,13 @@ public class MovableAnimatedActor extends AnimatedActor
         } 
         else {
             newAction = "idle";
-            if (direction != null && direction == "left"){
+            if (direction != null && direction.equals("left")){
                 newAction = "idleLeft";
             }
-            if (direction != null && direction == "right" && isFalling()){
+            if (direction != null && direction.equals("right") && isFalling()){
              newAction = "fallingRight";   
             }
-            if (direction != null && direction == "left" && isFalling()){
+            if (direction != null && direction.equals("left") && isFalling()){
              newAction = "fallingLeft";   
             }
         }
@@ -107,6 +115,12 @@ public class MovableAnimatedActor extends AnimatedActor
             }
             if (newAction.equals("fallingRight")){
                 setAnimation(fallingRight);   
+            }
+            if (newAction.equals("jumpRight")){
+                setAnimation(jumpRight);   
+            }
+            if (newAction.equals("jumpLeft")){
+                setAnimation(jumpLeft);   
             }
             currentAction = newAction;
         }
@@ -135,5 +149,12 @@ public class MovableAnimatedActor extends AnimatedActor
 
     public void setFallingRightAnimation(Animation ani){
         fallingRight = ani;
+    }
+    
+    public void setJumpRightAnimation(Animation ani){
+        jumpRight = ani;
+    }
+    public void setJumpLeftAnimation(Animation ani){
+        jumpLeft = ani;
     }
 }
