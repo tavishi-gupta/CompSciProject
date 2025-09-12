@@ -5,7 +5,7 @@ public class Eggs extends Ingredient
 {
     public Eggs()
     {
-        setImage("img/Tiles/stone.png");
+        setImage("img/eggs.png");
     }
     
     public void act(){

@@ -5,7 +5,7 @@ public class Bread extends Ingredient
 {
     public Bread()
     {
-        setImage("img/yarn.png");
+        setImage("img/bread.png");
     }
     
     public void act(){

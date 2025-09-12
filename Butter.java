@@ -5,7 +5,7 @@ public class Butter extends Ingredient
 {
     public Butter()
     {
-        setImage("img/yarn.png");
+        setImage("img/butter.png");
     }
     
     public void act(){
