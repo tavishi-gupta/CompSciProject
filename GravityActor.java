@@ -14,6 +14,13 @@ public class GravityActor extends Actor
         return false;
     }
     
+    public boolean isLadder() {
+        if (isTouching(Ladder.class)) {
+            return true;
+        }
+        return false;
+    }
+    
     public boolean isFalling() {
         boolean ret;
         setLocation(getX(), getY() + 5);

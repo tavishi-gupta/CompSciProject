@@ -12,7 +12,7 @@ public class Level2 extends World {
        setBackground("img/BG/BG1.png");
        
         
-        //cat = new Cat();
+       cat = new Cat();
        // addObject(cat, 100, 100);
         //dog = new Dog();
         //addObject(dog, 200, 200);
@@ -24,7 +24,7 @@ public class Level2 extends World {
         
        createTiles();
         //addRandomObjects();
-       addMainCharacter();
+       //addMainCharacter();
        buildWorld();
        showText("Score: ? Lives: ?", 10, 30, Color.BLACK);
     }
@@ -44,18 +44,30 @@ public class Level2 extends World {
         tiles[3][5] = "ground";
         tiles[3][6] = "ground";
         
-        tiles[2][3] = "ground";
+        tiles[3][0] = "ground";
+        tiles[2][0] = "salt";
+        
+        tiles[1][3] = "ladder";
+        tiles[2][3] = "ladder";
+        tiles[3][3] = "ladder";
+        
+        tiles[4][1] = "ladder";
+        tiles[3][1] = "ladder";
         
         tiles[1][0] = "ground";
         tiles[1][1] = "ground";
         tiles[1][2] = "ground";
         
-        tiles[4][5] = "salt";
-        tiles[4][1] = "lemon";
-        tiles[4][2] = "chips";
-        tiles[4][3] = "avocado";
-        tiles[4][4] = "onion";
+        tiles[4][7] = "ladder";
+        tiles[3][1] = "ladder";
+        
+        tiles[2][4] = "lemon";
+        tiles[4][6] = "chips";
+        tiles[0][0] = "avocado";
+        tiles[4][2] = "onion";
+        tiles[4][0] = "cat";
     }
+    
     
     public void buildWorld() {
         for (int r = 0; r < tiles.length; r++) {
@@ -66,9 +78,6 @@ public class Level2 extends World {
                     addObject(block, c*100, r*100);
                 }
                 
-                if (tiles[r][c].equals("cat")) {
-                    addObject(cat, c*100, r*100);
-                }
                 
                 if (tiles[r][c].equals("avocado")) {
                     addObject(new Avocado(), c*100, r*100);
@@ -89,38 +98,18 @@ public class Level2 extends World {
                 if (tiles[r][c].equals("chips")) {
                     addObject(new Chips(), c*100, r*100);
                 }
+                if (tiles[r][c].equals("ladder")) {
+                    addObject(new Ladder(), c*100, r*100);
+                }
                 
+                if (tiles[r][c].equals("cat")) {
+                    addObject(cat, c*100, r*100);
+                }
                 
             }
         }
     }
-   //
-    //public void addRandomObjects() {
-        //for(int r = 1; r < tiles.length-1; r++) {
-            //for (int c = 0; c < tiles[r].length; c++) {
-                //int num = (int) (Math.random()*tiles[r].length);
-                //if (num < 3) {
-                    //tiles[r][c] = "yarn";
-                //}
-                //if (num > 5) {
-                    //tiles[r][c] = "villain";
-                //}
-            //}
-        //}
-    //}
-    
-    public void addMainCharacter() {
-        cat = new Cat();
-        boolean added = false;
-        while (added == false) {
-            int row = (int) (Math.random()*tiles.length);
-            int col = (int) (Math.random()*tiles[0].length);
-            if (tiles[row][col].equals("")){
-                tiles[4][0] = "cat";
-                added = true;
-            }
-        }
-    }
+ 
     
     
     

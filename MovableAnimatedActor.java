@@ -9,6 +9,7 @@ public class MovableAnimatedActor extends AnimatedActor
     private Animation fallLeft;
     private Animation jumpRight;
     private Animation jumpLeft;
+    private Animation climb;
     private String currentAction;
     private String direction;
     
@@ -25,6 +26,7 @@ public class MovableAnimatedActor extends AnimatedActor
         currentAction = null;
         jumpLeft = null;
         jumpRight = null;
+        climb = null;
         direction = "right";
     }
 
@@ -34,6 +36,10 @@ public class MovableAnimatedActor extends AnimatedActor
 
     public void setWalkRightAnimation(Animation ani) {
         walkRight = ani;
+    }
+    
+    public void setClimbAnimation(Animation ani) {
+        climb = ani;
     }
 
     public void setIdleAnimation(Animation ani) {
@@ -104,11 +110,16 @@ public class MovableAnimatedActor extends AnimatedActor
             if(isBlocked()){
                 setLocation (x , y + 3);
             }
-            if (direction != null && direction == "left"){
-                newAction = "jumpLeft";
+            if (isLadder()) {
+                newAction = "climb";
             }
-            else if (direction != null && direction == "right"){
-             newAction = "jumpRight";   
+            else {
+                if (direction != null && direction == "left"){
+                    newAction = "jumpLeft";
+                }
+                else if (direction != null && direction == "right"){
+                    newAction = "jumpRight";   
+                }
             }
             if (y < 0) {
                 y = 0;
@@ -119,6 +130,9 @@ public class MovableAnimatedActor extends AnimatedActor
             setLocation(x, y+5);
             if (isBlocked()) {
                 setLocation(x, y-1);
+            }
+            if (isLadder()) {
+                newAction = "climb";
             }
             if (y+h > 600) {
                 y = 600 - h;
@@ -163,6 +177,9 @@ public class MovableAnimatedActor extends AnimatedActor
             }
            else if (newAction.equals("jumpLeft")){
                 setAnimation(jumpLeft);   
+           }
+           else if(newAction.equals("climb")) {
+               setAnimation(climb);
            }
            currentAction = newAction;
         }

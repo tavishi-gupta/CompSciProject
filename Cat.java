@@ -10,15 +10,18 @@ public class Cat extends MovableAnimatedActor
     private Animation fallRight;
     private Animation jumpLeft;
     private Animation jumpRight;
+    private Animation climb;
     private int score;
     private int lives;
     private int scoreBound;
+    private int level;
     
     public Cat() 
     {
         score = 0;
         scoreBound = 3;
         lives = 3;
+        level = 1;
         String [] walkName = new String[10];
         for (int i = 0; i < walkName.length; i++) {
             walkName[i] = "img/cat/Walk (" + (i+1) + ").png";
@@ -47,6 +50,16 @@ public class Cat extends MovableAnimatedActor
         walkLeft.scale(100, 87);
         walkLeft.setBounds(10, 5, 54, 80);
         walkLeft.mirrorHorizontally();
+        
+        String [] climbName = new String[10];
+        for (int i = 0; i < climbName.length; i++) {
+            climbName[i] = "img/cat/Climb (" + (i+1) + ").png";
+        }
+        
+        climb = new Animation(50, climbName);
+        setClimbAnimation(climb);
+        climb.scale(100, 87);
+        climb.setBounds(18, 5, 54, 80);
         
         String[] fallName = new String[10];
         for (int i = 0; i < fallName.length; i++) {
@@ -110,23 +123,27 @@ public class Cat extends MovableAnimatedActor
     }
     
     public boolean Level1Complete() {
-        if (score == scoreBound && lives > 0) {
-            scoreBound = 5;
+        if (score == 3 && lives > 0 && level == 1) {
             score = 0;
+            level++;
             return true;
         }
         return false;
     }
     
     public boolean Level2Complete() {
-        if (score == scoreBound && lives > 0) {
+        if (score == 5 && lives > 0 && level == 2) {
+            score = 0;
+            level++;
             return true;
         }
         return false;
     }
     
     public boolean Level3Complete() {
-        if (score == 7 && lives > 0) {
+        if (score == 7 && lives > 0 && level == 3) {
+            score = 0;
+            level++;
             return true;
         }
         return false;
@@ -140,15 +157,12 @@ public class Cat extends MovableAnimatedActor
             Mayflower.setWorld(new Level2());
         }
         
-        //if (Level2Complete()) {
-        //    Mayflower.setWorld(new Level3());
-        //}
+        if (Level2Complete()) {
+            Mayflower.setWorld(new Level3());
+        }
         
         if (Level3Complete()) {
             Mayflower.setWorld(new GameOverWin());
-        }
-        else {
-            Mayflower.setWorld(new GameOverLose());
         }
         
         //walk.setTransparency(50);

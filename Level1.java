@@ -8,8 +8,11 @@ public class Level1 extends World {
     private Block block2;
     private String[][] tiles;
     
+    
     public Level1() 
     {
+       
+        
         setBackground("img/BG/BG1.png");
         
         tiles = new String[6][8];
@@ -48,10 +51,13 @@ public class Level1 extends World {
        tiles[4][2] = "eggs";
        tiles[4][4] = "bread";
        tiles[3][6] = "butter";
-       tiles[4][0] = "cat";
+       tiles[4][1] = "cat";
+       tiles[4][0] = "ladder";
+       tiles[3][0] = "ladder";
 
     }
-
+    
+    
     public void buildWorld(){
         for (int row=0; row<tiles.length; row++)
         {
@@ -73,6 +79,9 @@ public class Level1 extends World {
                 }
                 if (tiles[row][col].equals("butter")){
                     addObject(new Butter(), col * 100, row*100);
+                }
+                if (tiles[row][col].equals("ladder")){
+                    addObject(new Ladder(), col * 100, row*100);
                 }
                 
             }
