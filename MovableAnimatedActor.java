@@ -17,6 +17,8 @@ public class MovableAnimatedActor extends AnimatedActor
     private Animation fallingRight;
     private Animation jumpRight;
     private Animation jumpLeft;
+    private boolean isJumping;
+    private Timer jumpTimer;
 
     public MovableAnimatedActor(){
         walkRight = null;
@@ -26,7 +28,11 @@ public class MovableAnimatedActor extends AnimatedActor
         idleLeft = null;
         fallingLeft = null;
         fallingRight = null;
+        jumpRight = null;
+        jumpLeft = null;
         direction = "right";
+        isJumping = false;
+        jumpTimer = new Timer(5000);
     }
 
     public void act(){
@@ -50,7 +56,7 @@ public class MovableAnimatedActor extends AnimatedActor
             }
             newAction = "walkRight";
             // if (isFalling()){
-                // newAction = "fallingRight";   
+            // newAction = "fallingRight";   
             // }
 
         }
@@ -62,26 +68,36 @@ public class MovableAnimatedActor extends AnimatedActor
             }
             newAction = "walkLeft";
             // if (isFalling()){
-                // newAction = "fallingLeft";   
+            // newAction = "fallingLeft";   
             // }
 
         }
-        else if ((y-1 > 0) && Mayflower.isKeyDown(Keyboard.KEY_UP)) {
-            setLocation (x , y - 3);
-            if(isBlocked()){
-                setLocation (x , y + 3);
-            }
-            if (direction != null && direction == "left"){
-                newAction = "jumpLeft";
-            }
-            else if (direction != null && direction == "right"){
-             newAction = "jumpRight";   
-            }
+        else if ((y-10 > 0) && Mayflower.isKeyDown(Keyboard.KEY_UP))
+        {
+
+
         }
         else if ((y+1+h < 600) && Mayflower.isKeyDown(Keyboard.KEY_DOWN)) {
-            setLocation(x, y+1);   
+            //setLocation(x, y+1);   
             if(isBlocked()){
                 setLocation (x, y - 1);
+            }
+        } 
+        else if ((y+1+h < 600) && Mayflower.isKeyDown(Keyboard.KEY_SPACE))    {
+            isJumping = false;
+            if (jumpTimer.isDone() && !isFalling() && !isJumping()){
+                setLocation (x , y - 150);
+                isJumping = true;
+            }
+            if(isBlocked()){
+                setLocation (x , y - 20);
+                isJumping = false;
+            }
+            if (direction != null && direction == "left" && !isFalling()){
+                newAction = "jumpLeft";
+            }
+            else if (direction != null && direction == "right" && !isFalling()){
+                newAction = "jumpRight";   
             }
         } 
         else {
@@ -90,10 +106,10 @@ public class MovableAnimatedActor extends AnimatedActor
                 newAction = "idleLeft";
             }
             if (direction != null && direction.equals("right") && isFalling()){
-             newAction = "fallingRight";   
+                newAction = "fallingRight";   
             }
             if (direction != null && direction.equals("left") && isFalling()){
-             newAction = "fallingLeft";   
+                newAction = "fallingLeft";   
             }
         }
 
@@ -150,10 +166,11 @@ public class MovableAnimatedActor extends AnimatedActor
     public void setFallingRightAnimation(Animation ani){
         fallingRight = ani;
     }
-    
+
     public void setJumpRightAnimation(Animation ani){
         jumpRight = ani;
     }
+
     public void setJumpLeftAnimation(Animation ani){
         jumpLeft = ani;
     }

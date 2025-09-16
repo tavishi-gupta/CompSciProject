@@ -95,8 +95,7 @@ public class Cat extends MovableAnimatedActor
 
         fallingRight = new Animation(50, fallingRightImg);
         fallingRight.scale(100,87);
-        fallingRight.mirrorHorizontally();
-        fallingRight.setBounds(28,5,54,80);
+        fallingRight.setBounds(18,5,54,80);
         setFallingRightAnimation(fallingRight);
 
         jumpRight = new Animation(50, jumpRightImg);
