@@ -9,6 +9,8 @@ public class MovableAnimatedActor extends AnimatedActor
     private Animation fallLeft;
     private Animation jumpRight;
     private Animation jumpLeft;
+    private boolean isJumping;
+    private Timer jumpTimer;
     private Animation climb;
     private String currentAction;
     private String direction;
@@ -28,6 +30,8 @@ public class MovableAnimatedActor extends AnimatedActor
         jumpRight = null;
         climb = null;
         direction = "right";
+        isJumping = false;
+        jumpTimer = new Timer(5000);
     }
 
     public void setAnimation(Animation a) {
@@ -106,21 +110,15 @@ public class MovableAnimatedActor extends AnimatedActor
             }
         }
         else if (Mayflower.isKeyDown(Keyboard.KEY_UP)) {
-            setLocation (x , y - 20);
+            //setLocation (x , y - 20);
             if(isBlocked()){
                 setLocation (x , y + 3);
             }
             if (isLadder()) {
+                setLocation (x , y - 20);
                 newAction = "climb";
             }
-            else {
-                if (direction != null && direction == "left"){
-                    newAction = "jumpLeft";
-                }
-                else if (direction != null && direction == "right"){
-                    newAction = "jumpRight";   
-                }
-            }
+            
             if (y < 0) {
                 y = 0;
                 setLocation(x, y);
@@ -139,6 +137,24 @@ public class MovableAnimatedActor extends AnimatedActor
                 setLocation(x, y);
             }
         }
+        
+        else if ((y+1+h < 600) && Mayflower.isKeyDown(Keyboard.KEY_SPACE))    {
+            isJumping = false;
+            if (jumpTimer.isDone() && !isFalling() && !isJumping()){
+                setLocation (x , y - 150);
+                isJumping = true;
+            }
+            if(isBlocked()){
+                setLocation (x , y - 20);
+                isJumping = false;
+            }
+            if (direction != null && direction == "left" && !isFalling()){
+                newAction = "jumpLeft";
+            }
+            else if (direction != null && direction == "right" && !isFalling()){
+                newAction = "jumpRight";   
+            }
+        } 
         
         else if(isFalling()) {
             newAction = "falling";

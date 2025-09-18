@@ -47,7 +47,8 @@ public class Level1 extends World {
         for (int i = 1; i<5; i++){
             tiles[3][i] = "ground";
         }
-        
+       
+       tiles[3][3] = "stove";
        tiles[4][2] = "eggs";
        tiles[4][4] = "bread";
        tiles[3][6] = "butter";
@@ -66,7 +67,9 @@ public class Level1 extends World {
                 if ( tiles[row][col].equals("ground") ){
                     addObject(new Block(), col*100, row*100);
                 }
-                
+                if (tiles[row][col].equals("stove")){
+                    addObject(new Stove(), col * 100, row*100);
+                }
                 if (tiles[row][col].equals("cat")){
                     addObject(new Cat(), col * 100, row*100);
                 }

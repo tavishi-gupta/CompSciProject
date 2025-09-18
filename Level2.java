@@ -41,8 +41,10 @@ public class Level2 extends World {
         }
         
         tiles[3][4] = "ground";
-        tiles[3][5] = "ground";
+        tiles[3][5] = "stove";
         tiles[3][6] = "ground";
+        
+        tiles[5][3] = "stove";
         
         tiles[3][0] = "ground";
         tiles[2][0] = "salt";
@@ -77,8 +79,9 @@ public class Level2 extends World {
                     block.scale(100, 100);
                     addObject(block, c*100, r*100);
                 }
-                
-                
+                if (tiles[r][c].equals("stove")){
+                    addObject(new Stove(), c * 100, r*100);
+                }
                 if (tiles[r][c].equals("avocado")) {
                     addObject(new Avocado(), c*100, r*100);
                 }

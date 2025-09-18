@@ -21,6 +21,13 @@ public class GravityActor extends Actor
         return false;
     }
     
+    public boolean isOnStove() {
+        if (isTouching(Stove.class)) {
+            return true;
+        }
+        return false;
+    }
+    
     public boolean isFalling() {
         boolean ret;
         setLocation(getX(), getY() + 5);
@@ -28,6 +35,14 @@ public class GravityActor extends Actor
         setLocation(getX(), getY() - 5);
         return !ret;
     }
+    
+    public boolean isJumping(){
+        boolean ret;
+        setLocation(getX(), getY() - 150);
+        ret = isTouching(Block.class);
+        return !ret;
+
+    } 
     
     public void act()
     {

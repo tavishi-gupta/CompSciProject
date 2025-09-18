@@ -40,11 +40,12 @@ public class Level3 extends World {
         for (int i = 3; i<5; i++){
             tiles[2][i] = "ground";
         }
-
+        
+        tiles[2][3] = "stove";
         tiles[4][2] = "eggs";
         tiles[4][4] = "sugar";
         tiles[3][6] = "flour";
-        tiles[2][1] = "chocolate";
+        tiles[2][0] = "chocolate";
         tiles[1][4] = "baking soda";
         tiles[1][2] = "milk";
         tiles[4][7] = "icing";
@@ -52,7 +53,7 @@ public class Level3 extends World {
         tiles[3][5] = "ladder";
         tiles[2][5] = "ladder";
         tiles[4][6] = "ground";
-
+        tiles[3][1] = "stove";
         tiles[0][0] = "cat";
     }
 
@@ -66,7 +67,9 @@ public class Level3 extends World {
                 if ( tiles[row][col].equals("ground") ){
                     addObject(b, col*100, row*100);
                 }
-
+                if (tiles[row][col].equals("stove")){
+                    addObject(new Stove(), col * 100, row*100);
+                }
                 
 
                 if (tiles[row][col].equals("eggs")){

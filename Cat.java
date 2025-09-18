@@ -18,8 +18,8 @@ public class Cat extends MovableAnimatedActor
     
     public Cat() 
     {
-        score = 0;
-        scoreBound = 3;
+        score = 3;
+        //scoreBound = 3;
         lives = 3;
         level = 1;
         String [] walkName = new String[10];
@@ -109,7 +109,7 @@ public class Cat extends MovableAnimatedActor
     }
     
     public void increaseScore(int amount) {
-        score+=amount;
+        score-=amount;
     }
     
     public void decreaseLives(int amount) {
@@ -123,16 +123,25 @@ public class Cat extends MovableAnimatedActor
     }
     
     public boolean Level1Complete() {
-        if (score == 3 && lives > 0 && level == 1) {
-            score = 0;
-            level++;
+        if (score == 0 && lives > 0) {
+            score = 5;
+            updateText();
             return true;
         }
         return false;
     }
     
     public boolean Level2Complete() {
-        if (score == 5 && lives > 0 && level == 2) {
+        if (score == 0 && lives > 0) {
+            score = 7;
+            updateText();
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean Level3Complete() {
+        if (score == 0 && lives > 0) {
             score = 0;
             level++;
             return true;
@@ -140,10 +149,8 @@ public class Cat extends MovableAnimatedActor
         return false;
     }
     
-    public boolean Level3Complete() {
-        if (score == 7 && lives > 0 && level == 3) {
-            score = 0;
-            level++;
+    public boolean GameOver() {
+        if (lives <= 0) {
             return true;
         }
         return false;
@@ -153,16 +160,22 @@ public class Cat extends MovableAnimatedActor
     {
         
         super.act();
-        if (Level1Complete()) {
+        if (Level1Complete() && level == 1) {
             Mayflower.setWorld(new Level2());
+            level++;
         }
         
-        if (Level2Complete()) {
+        if (Level2Complete() && level == 2) {
             Mayflower.setWorld(new Level3());
+            level++;
         }
         
-        if (Level3Complete()) {
+        if (Level3Complete() && level == 3) {
             Mayflower.setWorld(new GameOverWin());
+        }
+        
+        if (GameOver()) {
+            Mayflower.setWorld(new GameOverLose());
         }
         
         //walk.setTransparency(50);
