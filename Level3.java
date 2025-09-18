@@ -49,6 +49,7 @@ public class Level3 extends World {
         tiles[4][7] = "icing";
 
         tiles[0][0] = "cat";
+        tiles[1][2] = "remy";
     }
 
     public void buildWorld(){
@@ -86,6 +87,9 @@ public class Level3 extends World {
                 }
                 if (tiles[row][col].equals("sugar")){
                     addObject(new Sugar(), col * 100, row*100);
+                }
+                if (tiles[row][col].equals("remy")){
+                    addObject(new Remy(), col * 100, row*100);
                 }
 
             }

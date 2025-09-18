@@ -1,15 +1,10 @@
 import mayflower.*;
-/**
- * Write a description of class MovableAnimatedActor here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class MovableAnimatedActor extends AnimatedActor
 {
     private Animation walkRight;
     private Animation idle;
-    private String direction;
+    private Enum Direction;
     private String currentAction;
     private Animation walkLeft;
     private Animation idleLeft;
@@ -30,7 +25,7 @@ public class MovableAnimatedActor extends AnimatedActor
         fallingRight = null;
         jumpRight = null;
         jumpLeft = null;
-        direction = "right";
+        Direction = null;
         isJumping = false;
         jumpTimer = new Timer(5000);
     }
@@ -48,7 +43,7 @@ public class MovableAnimatedActor extends AnimatedActor
         int w = getWidth();
         int h = getHeight();
         if (((x+1+w)<800) && (Mayflower.isKeyDown(Keyboard.KEY_RIGHT))) {
-            direction = "right";
+            Direction = Direction.right;
             setLocation(x+1, y);
             if(isBlocked()){
                 setLocation (x - 1, y);
@@ -61,7 +56,7 @@ public class MovableAnimatedActor extends AnimatedActor
 
         }
         else if ((x-1 > 0) && Mayflower.isKeyDown(Keyboard.KEY_LEFT)) {
-            direction = "left";
+            Direction = Direction.left;
             setLocation(x-1, y);
             if(isBlocked()){
                 setLocation (x + 1, y);
@@ -93,31 +88,31 @@ public class MovableAnimatedActor extends AnimatedActor
                 setLocation (x , y - 20);
                 isJumping = false;
             }
-            if (direction != null && direction == "left" && !isFalling()){
+            if (direction != null && direction.equals(Direction.left) && !isFalling()){
                 newAction = "jumpLeft";
             }
-            else if (direction != null && direction == "right" && !isFalling()){
+            else if (direction != null && direction.equals(Direction.right) && !isFalling()){
                 newAction = "jumpRight";   
             }
         } 
         else {
             newAction = "idle";
-            if (direction != null && direction.equals("left")){
+            if (direction != null && direction == Direction.left){
                 newAction = "idleLeft";
             }
-            if (direction != null && direction.equals("right") && isFalling()){
+            if (direction != null && direction.equals(Direction.right) && isFalling()){
                 newAction = "fallingRight";   
             }
-            if (direction != null && direction.equals("left") && isFalling()){
+            if (direction != null && direction.equals(Direction.left) && isFalling()){
                 newAction = "fallingLeft";   
             }
         }
 
         if (newAction != null && !newAction.equals(currentAction) ){
-            if (newAction.equals("walkRight")){
+            if (newAction.equals(Action.walkRight)){
                 setAnimation(walkRight);
             }
-            if (newAction.equals("walkLeft")){
+            if (newAction.equals(  Action.walkLeft)){
                 setAnimation(walkLeft);
             }
             if (newAction.equals("idle")){

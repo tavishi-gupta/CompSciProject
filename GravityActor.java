@@ -1,5 +1,5 @@
 import mayflower.*;
-public class GravityActor extends Actor
+public class GravityActor extends CooldownActor
 {
 
     public GravityActor()

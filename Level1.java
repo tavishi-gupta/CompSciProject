@@ -46,6 +46,7 @@ public class Level1 extends World {
        tiles[4][4] = "bread";
        tiles[3][6] = "butter";
        tiles[4][0] = "cat";
+       tiles[2][3] = "remy";
 
     }
 
@@ -72,6 +73,9 @@ public class Level1 extends World {
                 }
                 if (tiles[row][col].equals("butter")){
                     addObject(new Butter(), col * 100, row*100);
+                }
+                if (tiles[row][col].equals("remy")){
+                    addObject(new Remy(), col * 100, row*100);
                 }
                 
             }

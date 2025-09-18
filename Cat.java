@@ -102,7 +102,7 @@ public class Cat extends MovableAnimatedActor
         jumpRight.scale(100,87);
         jumpRight.setBounds(18,5,54,80);
         setJumpRightAnimation(jumpRight);
-        
+
         jumpLeft = new Animation(50, jumpLeftImg);
         jumpLeft.scale(100,87);
         jumpLeft.mirrorHorizontally();
@@ -111,50 +111,59 @@ public class Cat extends MovableAnimatedActor
 
         setAnimation(idle);
     }
+
     public void increaseScore(int amount) {
         score+=amount;
     }
-    
+
     public void decreaseLives(int amount) {
         lives-=amount;
     }
-    
+
     public void updateText() {
         World w = getWorld();
         w.removeText(10, 30);
         w.showText("Ingredients: " + score + "Lives: " + lives, 10, 30, Color.BLACK);
     }
-    
+
     public boolean Level1Complete() {
         if (score == 3 && lives > 0) {
             return true;
         }
         return false;
     }
-    
+
     public boolean Level2Complete() {
         if (score == 5 && lives > 0) {
             return true;
         }
         return false;
     }
-    
+
     public boolean Level3Complete() {
         if (score == 7 && lives > 0) {
-            return true;
+            return true;  
         }
         return false;
     }
-    
+
     public void act()
     {
-        
+
         super.act();
+
+        if (this.isTouching(Hazard.class)){
+            if (!isInvulnerable()){
+                decreaseLives(1);
+                setInvulnerable();
+                updateText();
+            }
+        }
         if (Level1Complete()) {
             Mayflower.setWorld(new Level2());
         }
-        
+
         //walk.setTransparency(50);
-        
+
     }
 }

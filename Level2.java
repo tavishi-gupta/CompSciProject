@@ -48,25 +48,41 @@ public class Level2 extends World {
         tiles[1][0] = "ground";
         tiles[1][1] = "ground";
         tiles[1][2] = "ground";
+        tiles[4][3] = "remy";
     }
     
     public void buildWorld() {
-        for (int r = 0; r < tiles.length; r++) {
-            for (int c = 0; c < tiles[r].length; c++) {
-                if (tiles[r][c].equals("ground")) {
-                    Block block = new Block();
-                    block.scale(100, 100);
-                    addObject(block, c*100, r*100);
+        for (int row=0; row<tiles.length; row++)
+        {
+            for (int col=0; col<tiles[row].length; col++)
+            {
+                Block b = new Block();
+                b.scale(100,100);
+                if ( tiles[row][col].equals("ground") ){
+                    addObject(b, col*100, row*100);
                 }
                 
-                if (tiles[r][c].equals("cat")) {
-                    addObject(cat, c*100, r*100);
+                if (tiles[row][col].equals("cat")){
+                    addObject(new Cat(), col * 100, row*100);
                 }
                 
+                if (tiles[row][col].equals("eggs")){
+                    addObject(new Eggs(), col * 100, row*100);
+                }
+                if (tiles[row][col].equals("bread")){
+                    addObject(new Bread(), col * 100, row*100);
+                }
+                if (tiles[row][col].equals("butter")){
+                    addObject(new Butter(), col * 100, row*100);
+                }
+                if (tiles[row][col].equals("remy")){
+                    addObject(new Remy(), col * 100, row*100);
+                }
                 
             }
         }
-    }
+        }
+    
    //
     //public void addRandomObjects() {
         //for(int r = 1; r < tiles.length-1; r++) {
