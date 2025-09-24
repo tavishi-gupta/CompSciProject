@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Remy
+comment1.params=
+comment1.target=Remy()
+comment2.params=lowx\ lowy\ highx\ highy
+comment2.target=void\ setRemyBounds(int,\ int,\ int,\ int)
+comment3.params=
+comment3.target=void\ act()
+numComments=4

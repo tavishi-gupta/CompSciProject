@@ -7,7 +7,10 @@ public class Level1 extends World {
     private Block block;
     private Block block2;
     private String[][] tiles;
-    
+    private int lowx;
+    private int lowy;
+    private int highx;
+    private int highy;
     
     public Level1() 
     {
@@ -19,6 +22,10 @@ public class Level1 extends World {
         createTiles();
         buildWorld();
 
+        lowx = 0;
+        lowy = 50;
+        highx = 300;
+        highy = 100;
         
         Mayflower.showBounds(true);
         showText("Score: ? Lives: ?", 10, 30, Color.BLACK);
@@ -55,6 +62,7 @@ public class Level1 extends World {
        tiles[4][1] = "cat";
        tiles[4][0] = "ladder";
        tiles[3][0] = "ladder";
+       tiles[1][1] = "remy";
 
     }
     
@@ -85,6 +93,11 @@ public class Level1 extends World {
                 }
                 if (tiles[row][col].equals("ladder")){
                     addObject(new Ladder(), col * 100, row*100);
+                }
+                if ( tiles[row][col].equals("remy") ){
+                    Remy remy = new Remy();
+                    remy.setRemyBounds(lowx, lowy, highx, highy);
+                    addObject(remy, col*100, row*100);
                 }
                 
             }
