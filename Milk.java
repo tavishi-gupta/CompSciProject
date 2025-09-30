@@ -4,8 +4,12 @@ public class Milk extends Ingredient
    
     public Milk()
     {
-      setImage("img/eggs.png");
-    }
+      setImage("img/ingredients/milk.png");
+      this.scale(50, 50);
+     }
 
+    public void act(){
+        super.act();   
+    }
     
 }

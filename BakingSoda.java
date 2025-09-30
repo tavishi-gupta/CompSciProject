@@ -7,5 +7,8 @@ public class BakingSoda extends Ingredient
       setImage("img/ingredients/bakingsoda.png");
     }
 
+    public void act(){
+        super.act();   
+    }
     
 }

@@ -1,23 +1,14 @@
-import mayflower.*;
+import mayflower.* ;
 public class Block extends Actor
 {
-    // instance variables - replace the example below with your own
     
-
-    /**
-     * Constructor for objects of class Block
-     */
     public Block()
     {
-        
+        setImage("img/tiles/tiles.png");
+
     }
 
-    
-    public void act()
-    {
-        // put your code here
-        setImage("img/Tiles/tiles.png");
-        //this.scale(100, 100);
+    public void act(){
         
     }
 }

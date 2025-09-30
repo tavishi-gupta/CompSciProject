@@ -2,10 +2,12 @@
 comment0.target=Level3
 comment1.params=
 comment1.target=Level3()
-comment2.params=
-comment2.target=void\ act()
+comment2.params=c
+comment2.target=Level3(Cat)
 comment3.params=
-comment3.target=void\ createTiles()
+comment3.target=void\ act()
 comment4.params=
-comment4.target=void\ buildWorld()
-numComments=5
+comment4.target=void\ createTiles()
+comment5.params=
+comment5.target=void\ buildWorld()
+numComments=6

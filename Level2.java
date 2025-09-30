@@ -7,12 +7,17 @@ public class Level2 extends World {
     private String[][] tiles;
     
     public Level2() 
+    { 
+        this(new Cat());
+    }
+    
+    public Level2(Cat c) 
     {
        Mayflower.showBounds(true);
        setBackground("img/BG/BG1.png");
        
         
-       cat = new Cat();
+       cat = c;
        // addObject(cat, 100, 100);
         //dog = new Dog();
         //addObject(dog, 200, 200);
@@ -68,8 +73,6 @@ public class Level2 extends World {
         tiles[0][0] = "avocado";
         tiles[4][2] = "onion";
         tiles[4][0] = "cat";
-        
-        tiles[1][4] = "remy";
     }
     
     
@@ -109,11 +112,6 @@ public class Level2 extends World {
                 
                 if (tiles[r][c].equals("cat")) {
                     addObject(cat, c*100, r*100);
-                }
-                if ( tiles[r][c].equals("remy") ){
-                    Remy remy = new Remy();
-                    remy.setRemyBounds(400, 800);
-                    addObject(remy, c*100, r*100);
                 }
                 
             }
