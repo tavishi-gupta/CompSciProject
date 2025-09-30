@@ -1,20 +1,14 @@
 
-
 import mayflower.*;
 
 public class Level3 extends World {
     private Cat cat;
     private String[][] tiles;
-    public Level3() 
-    { 
-        this(new Cat());
-    }
-    
-    public Level3(Cat c) 
-    {
 
+    public Level3() 
+    {
         setBackground("img/BG/BG1.png");
-        cat = c;
+
         tiles = new String[6][8];
         createTiles();
         buildWorld();
@@ -51,7 +45,7 @@ public class Level3 extends World {
         tiles[4][2] = "eggs";
         tiles[4][4] = "sugar";
         tiles[3][6] = "flour";
-        tiles[2][0] = "chocolate";
+        tiles[2][2] = "chocolate";
         tiles[1][4] = "baking soda";
         tiles[1][2] = "milk";
         tiles[4][7] = "icing";
@@ -60,7 +54,9 @@ public class Level3 extends World {
         tiles[2][5] = "ladder";
         tiles[4][6] = "ground";
         tiles[3][1] = "stove";
-        tiles[0][0] = "cat";
+        tiles[2][0] = "cat";
+        tiles[3][0] = "ground";
+        tiles[1][0] = "remy";
     }
 
     public void buildWorld(){
@@ -103,7 +99,12 @@ public class Level3 extends World {
                     addObject(new Ladder(), col * 100, row*100);
                 }
                 if (tiles[row][col].equals("cat")){
-                    addObject(cat, col * 100, row*100);
+                    addObject(new Cat(), col * 100, row*100);
+                }
+                if ( tiles[row][col].equals("remy") ){
+                    Remy remy = new Remy();
+                    remy.setRemyBounds(0, 300);
+                    addObject(remy, col*100, row*100);
                 }
 
             }

@@ -7,8 +7,5 @@ public class Icing extends Ingredient
       setImage("img/ingredients/icing.png");
     }
 
-    public void act(){
-        super.act();   
-    }
     
 }

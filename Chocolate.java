@@ -7,8 +7,5 @@ public class Chocolate extends Ingredient
       setImage("img/ingredients/chocolate.png");
     }
 
-    public void act(){
-        super.act();   
-    }
     
 }

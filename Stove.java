@@ -1,4 +1,3 @@
-
 import mayflower.*;
 public class Stove extends Actor
 {
