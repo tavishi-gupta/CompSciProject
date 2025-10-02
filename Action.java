@@ -1,5 +1,5 @@
 
 public enum Action
 {
-    walkLeft, walkRight, idleLeft, idleRight, fallingLeft, fallingRight, jumpLeft, jumpRight, climb
+    walkLeft, walkRight, idleLeft, idle, fallingLeft, falling, jumpLeft, jumpRight, climb
 }
