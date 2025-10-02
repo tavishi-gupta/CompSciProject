@@ -18,11 +18,13 @@ public class Cat extends MovableAnimatedActor
 
     public Cat() 
     {
+        //initialize variables to level 1 values
         score = 3;
-        //scoreBound = 3;
         lives = 3;
         level = 1;
-                String[] walkImg = new String[10];
+        
+        //create string arrays for animations
+        String[] walkImg = new String[10];
         for (int i = 0; i < walkImg.length; i++){
             walkImg[i] = "img/cat/Walk (" + (i+1) + ").png";
 
@@ -68,7 +70,13 @@ public class Cat extends MovableAnimatedActor
             jumpLeftImg[i] = "img/cat/Jump (" + (i+1) + ").png";
 
         }
+        
+        String [] climbName = new String[10];
+        for (int i = 0; i < climbName.length; i++) {
+            climbName[i] = "img/cat/Climb (" + (i+1) + ").png";
+        }
 
+        //create animations
         walkRight = new Animation(50, walkImg);
         walkRight.scale(100,87);
         walkRight.setBounds(18,5,54,80);
@@ -112,12 +120,7 @@ public class Cat extends MovableAnimatedActor
         jumpLeft.mirrorHorizontally();
         jumpLeft.setBounds(28,5,54,80);
         setJumpLeftAnimation(jumpLeft);
-        
-        String [] climbName = new String[10];
-        for (int i = 0; i < climbName.length; i++) {
-            climbName[i] = "img/cat/Climb (" + (i+1) + ").png";
-        }
-        
+
         climb = new Animation(50, climbName);
         setClimbAnimation(climb);
         climb.scale(100, 87);
@@ -138,13 +141,15 @@ public class Cat extends MovableAnimatedActor
     public void decreaseLives(int amount) {
         lives-=amount;
     }
-
+    
+    //to update text when score or lives change
     public void updateText() {
         World w = getWorld();
         w.removeText(10, 30);
         w.showText("Ingredients: " + score + "Lives: " + lives, 10, 30, Color.BLACK);
     }
-
+    
+    //check if level 1 is complete
     public boolean Level1Complete() {
         if (score == 0 && lives > 0 && level == 1) {
             level++;
@@ -152,7 +157,8 @@ public class Cat extends MovableAnimatedActor
         }
         return false;
     }
-
+    
+    //check if level 2 is complete
     public boolean Level2Complete() {
         if (score == 0 && lives > 0  && level == 2) {
 
@@ -161,7 +167,8 @@ public class Cat extends MovableAnimatedActor
         }
         return false;
     }
-
+    
+    //check if level 3 is complete
     public boolean Level3Complete() {
         if (score == 0 && lives > 0 && level == 3) {
             level++;
@@ -169,7 +176,8 @@ public class Cat extends MovableAnimatedActor
         }
         return false;
     }
-
+    
+    //check if game is over (all lives have been lost)
     public boolean GameOver() {
         if (lives <= 0) {
             return true;
@@ -181,6 +189,7 @@ public class Cat extends MovableAnimatedActor
     {
 
         super.act();
+        //switch levels
         if (Level1Complete()) {
             increaseScore(5);
             Mayflower.setWorld(new Level2(this));
@@ -202,7 +211,6 @@ public class Cat extends MovableAnimatedActor
             Mayflower.setWorld(new GameOverLose());
         }
 
-        //walk.setTransparency(50);
 
     }
 }
