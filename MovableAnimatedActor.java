@@ -1,6 +1,7 @@
 import mayflower.*;
 public class MovableAnimatedActor extends AnimatedActor
 {
+    //setting up all instance variables, animations, jumping, direction, and action
     private Animation walkRight;
     private Animation walkLeft;
     private Animation idle;
@@ -12,7 +13,7 @@ public class MovableAnimatedActor extends AnimatedActor
     private boolean isJumping;
     private Timer jumpTimer;
     private Animation climb;
-    private Action currentAction;
+    private Action currentAction; //both action and direction are enums
     private Direction direction;
 
     public MovableAnimatedActor()
@@ -32,7 +33,8 @@ public class MovableAnimatedActor extends AnimatedActor
         isJumping = false;
         jumpTimer = new Timer(5000);
     }
-
+    
+    //the following setter methods are to set the corresponding animation to the action the cat is in
     public void setAnimation(Animation a) {
         super.setAnimation(a);
     }
@@ -76,6 +78,7 @@ public class MovableAnimatedActor extends AnimatedActor
     public void act()
     {
         super.act();
+        //sets up new action 
         Action newAction = null;
         if (currentAction == null) {
             newAction = Action.idle;
@@ -84,11 +87,13 @@ public class MovableAnimatedActor extends AnimatedActor
         int y = getY();
         int w = getWidth();
         int h = getHeight();
+        //the following if/else statements are to set keyboard functions (up,down,left,right)
+        //sets the new location, checks if the position is block, and changes animation accordingly
         if (Mayflower.isKeyDown(Keyboard.KEY_RIGHT)) {
             setLocation(x+5, y);
             newAction = Action.walkRight;
             direction = Direction.right;
-            if (isBlocked()) {
+            if (isBlocked()) { 
                 setLocation(x-5, y);
             }
             if (x+w > 800) {
@@ -141,7 +146,7 @@ public class MovableAnimatedActor extends AnimatedActor
         }
 
         else if ((y+1+h < 600) && Mayflower.isKeyDown(Keyboard.KEY_SPACE))    {
-            isJumping = false;
+            isJumping = false; //the down key has to account for falling and jumping
             if (jumpTimer.isDone() && !isFalling() && !isJumping()){
                 setLocation (x , y - 150);
                 isJumping = true;
@@ -168,6 +173,7 @@ public class MovableAnimatedActor extends AnimatedActor
                 newAction = Action.idleLeft;
             }
         }
+        //the following if/else statements set the animation to the new action 
 
         if (newAction != null && !newAction.equals(currentAction)) {
             if(newAction == Action.walkRight) {

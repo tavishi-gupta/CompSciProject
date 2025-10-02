@@ -1,18 +1,17 @@
-
-
 import mayflower.*;
 
 public class Level3 extends World {
     private Cat cat;
     private String[][] tiles;
-    public Level3() 
-    { 
+    //this constructor ensures that the same cat is used throughout the levels
+    //so score and lives are updated appropriately
+    public Level3()
+    {
         this(new Cat());
     }
-    
-    public Level3(Cat c) 
-    {
 
+    public Level3(Cat c)
+    {
         setBackground("img/BG/BG1.png");
         cat = c;
         tiles = new String[6][8];
@@ -25,8 +24,8 @@ public class Level3 extends World {
     public void act()
     {
     }
-    
 
+    //this methods sets up all objects in a 2d array of tiles
     public void createTiles(){
         for (int r = 0; r < tiles.length; r++){
             for (int c = 0; c < tiles[r].length; c++){
@@ -46,12 +45,12 @@ public class Level3 extends World {
         for (int i = 3; i<5; i++){
             tiles[2][i] = "ground";
         }
-        
+
         tiles[2][3] = "stove";
         tiles[4][2] = "eggs";
         tiles[4][4] = "sugar";
         tiles[3][6] = "flour";
-        tiles[2][0] = "chocolate";
+        tiles[2][2] = "chocolate";
         tiles[1][4] = "baking soda";
         tiles[1][2] = "milk";
         tiles[4][7] = "icing";
@@ -60,9 +59,11 @@ public class Level3 extends World {
         tiles[2][5] = "ladder";
         tiles[4][6] = "ground";
         tiles[3][1] = "stove";
-        tiles[0][0] = "cat";
+        tiles[2][0] = "cat";
+        tiles[3][0] = "ground";
+        tiles[1][7] = "remy";
     }
-
+    //this method actually puts those objects on the world in terms of x and y
     public void buildWorld(){
         for (int row=0; row<tiles.length; row++)
         {
@@ -76,7 +77,6 @@ public class Level3 extends World {
                 if (tiles[row][col].equals("stove")){
                     addObject(new Stove(), col * 100, row*100);
                 }
-                
 
                 if (tiles[row][col].equals("eggs")){
                     addObject(new Eggs(), col * 100, row*100);
@@ -104,6 +104,11 @@ public class Level3 extends World {
                 }
                 if (tiles[row][col].equals("cat")){
                     addObject(cat, col * 100, row*100);
+                }
+                if ( tiles[row][col].equals("remy") ){
+                    Remy remy = new Remy();
+                    remy.setRemyBounds(500, 800);
+                    addObject(remy, col*100, row*100);
                 }
 
             }

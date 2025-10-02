@@ -1,77 +1,73 @@
 import mayflower.*;
 
-
 public class Level2 extends World {
-
     private Cat cat;
     private String[][] tiles;
-   
+    //this constructor ensures that the same cat is used throughout the levels
+    //so score and lives are updated appropriately
     public Level2()
     {
         this(new Cat());
     }
-   
+
     public Level2(Cat c)
     {
-       Mayflower.showBounds(true);
-       setBackground("img/BG/BG1.png");
-       
-       
-       cat = c;
+        Mayflower.showBounds(true);
+        setBackground("img/BG/BG1.png");
 
-       tiles = new String[6][8];
-       
-       createTiles();
+        cat = c;
+        tiles = new String[6][8];
+        createTiles();
         //addRandomObjects();
-       //addMainCharacter();
-       buildWorld();
-       showText("Score: ? Lives: ?", 10, 30, Color.BLACK);
+        //addMainCharacter();
+        buildWorld();
+        showText("Score: ? Lives: ?", 10, 30, Color.BLACK);
     }
-   
+    //this methods sets up all objects in a 2d array of tiles
     public void createTiles() {
         for(int r = 0; r < tiles.length; r++) {
             for (int c = 0; c < tiles[r].length; c++) {
                 tiles[r][c] = "";
             }
         }
-       
+
         for(int i = 0; i < tiles[0].length; i++) {
             tiles[5][i] = "ground";
         }
-       
+
         tiles[3][4] = "ground";
         tiles[3][5] = "stove";
         tiles[3][6] = "ground";
-       
+
         tiles[5][3] = "stove";
-       
+
         tiles[3][0] = "ground";
         tiles[2][0] = "salt";
-       
+
         tiles[1][3] = "ladder";
         tiles[2][3] = "ladder";
         tiles[3][3] = "ladder";
-       
+
         tiles[4][1] = "ladder";
         tiles[3][1] = "ladder";
-       
+
         tiles[1][0] = "ground";
         tiles[1][1] = "ground";
         tiles[1][2] = "ground";
-       
+
         tiles[4][7] = "ladder";
         tiles[3][1] = "ladder";
-       
+
         tiles[2][4] = "lemon";
         tiles[4][6] = "chips";
         tiles[0][0] = "avocado";
         tiles[4][2] = "onion";
         tiles[4][0] = "cat";
-       
+
         tiles[1][4] = "remy";
     }
-   
-   
+
+    //this method actually puts those objects on the world in terms of x and y
     public void buildWorld() {
         for (int r = 0; r < tiles.length; r++) {
             for (int c = 0; c < tiles[r].length; c++) {
@@ -86,26 +82,26 @@ public class Level2 extends World {
                 if (tiles[r][c].equals("avocado")) {
                     addObject(new Avocado(), c*100, r*100);
                 }
-               
+
                 if (tiles[r][c].equals("onion")) {
                     addObject(new Onion(), c*100, r*100);
                 }
-               
+
                 if (tiles[r][c].equals("lemon")) {
                     addObject(new Lemon(), c*100, r*100);
                 }
-               
+
                 if (tiles[r][c].equals("salt")) {
                     addObject(new Salt(), c*100, r*100);
                 }
-               
+
                 if (tiles[r][c].equals("chips")) {
                     addObject(new Chips(), c*100, r*100);
                 }
                 if (tiles[r][c].equals("ladder")) {
                     addObject(new Ladder(), c*100, r*100);
                 }
-               
+
                 if (tiles[r][c].equals("cat")) {
                     addObject(cat, c*100, r*100);
                 }
@@ -114,16 +110,13 @@ public class Level2 extends World {
                     remy.setRemyBounds(400, 800);
                     addObject(remy, c*100, r*100);
                 }
-               
+
             }
         }
     }
- 
-   
-   
-   
+
     public void act()
     {
     }
-   
+
 }
